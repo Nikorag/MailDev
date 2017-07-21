@@ -10,6 +10,7 @@ app.config(['$routeProvider', function ($routeProvider) {
   $routeProvider
     .when('/', { templateUrl: 'views/main.html', controller: 'MainCtrl' })
     .when('/email/:itemId', { templateUrl: 'views/item.html', controller: 'ItemCtrl' })
+    .when('/editProjects', {templateUrl: 'views/editProjects.html', controller: 'ProjectsCtrl'})
     .otherwise({ redirectTo: '/' })
 }])
 
@@ -20,6 +21,7 @@ app.run(['$rootScope', function ($rootScope) {
   })
 
   socket.on('newMail', function (data) {
+    console.log(JSON.stringify(data));
     $rootScope.$emit('newMail', data)
   })
 
@@ -27,8 +29,16 @@ app.run(['$rootScope', function ($rootScope) {
     $rootScope.$emit('deleteMail', data)
   })
 
+  socket.on('updateProjects', function (data) {
+    $rootScope.$emit('updateProjects', data)
+  })
+
   $rootScope.$on('Refresh', function () {
     console.log('Refresh event called.')
+  })
+
+  $rootScope.$on('saveProjects', function (event, data) {
+    socket.emit('saveProjects', data)
   })
 }])
 

@@ -1,0 +1,35 @@
+<ul class="toolbar email-toolbar on-light">
+  <li class="dropdown-container">
+    <a ng-click="addProject()">
+      <i class="fa fa-plus"></i>
+      Add Project
+    </a>
+  </li>
+  <li class="dropdown-container">
+    <a ng-click="save(editProjects)">
+      <i class="fa fa-floppy-o"></i>
+      Save
+    </a>
+  </li>
+</ul>
+<ul class="projectList">
+  <li ng-repeat="project in editProjects track by $index">
+    <i class="fa fa-pencil"></i><input ng-model="project.name"/>
+    <ul class="addressList">
+      <li ng-repeat="addr in project.addr track by $index">
+        <div class="ms-TextField">
+          <i class="fa fa-ban" ng-click="removeAddr(project,addr)"></i><input class="ms-TextField-field" type="text" value="" placeholder="" ng-model="project.addr[$index]">
+        </div>
+      </li>
+    </ul>
+    <a ng-click="addAddress(project)" class="projectBtn">
+      <i class="fa fa-plus"></i>
+      Add Address
+    </a>
+    <a ng-click="removeProject(project)" class="projectBtn">
+      <i class="fa fa-ban"></i>
+      Remove Project
+    </a>
+    <span class="clearfix">&nbsp;</span>
+  </li>
+</ul>

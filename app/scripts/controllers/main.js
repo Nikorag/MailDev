@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* global app */
 
 /**
@@ -5,13 +6,31 @@
  */
 
 app.controller('MainCtrl', [
-  '$scope', '$rootScope', '$http', 'Email', '$route', '$location',
-  function ($scope, $rootScope, $http, Email, $route, $location) {
+  '$scope', '$rootScope', '$http', 'Email', '$route', '$location', 'filterFilter', 'projectService',
+  function ($scope, $rootScope, $http, Email, $route, $location, filterFilter, projectService) {
     $scope.items = []
     $scope.configOpen = false
     $scope.currentItemId = null
     $scope.autoShow = false
     $scope.unreadItems = 0
+    $scope.projects = []
+    $scope.projectFilter = []
+
+    $scope.toggleProjectSelection = function (project) {
+      var idx = $scope.projectFilter.indexOf(project)
+      if (idx > -1) {
+        $scope.projectFilter.splice(idx, 1)
+      } else {
+        $scope.projectFilter.push(project)
+      }
+    }
+
+    $scope.filterItems = function (search) {
+      var items = filterFilter($scope.items, search)
+      return items.filter(function (item) {
+        return $scope.projectFilter.includes(projectService.getProjectForAddr(item.envelope.remoteAddress).name)
+      })
+    }
 
     var countUnread = function () {
       $scope.unreadItems = $scope.items.filter(function (email) {
@@ -79,6 +98,17 @@ app.controller('MainCtrl', [
       }
     })
 
+    $rootScope.$on('updateProjects', function (e, projects) {
+      $scope.projects = projects
+      projectService.set(projects);
+      // Add all the projects into scope
+      for (var i in projects) {
+        $scope.projectFilter.push(projects[i].name)
+      }
+    })
+
+    $scope.getProjectForAddr = projectService.getProjectForAddr
+
     // Click event handlers
     $scope.markRead = function (email) {
       email.read = true
@@ -101,6 +131,7 @@ app.controller('MainCtrl', [
         $rootScope.config = data
         $scope.config = data
       })
+
   }
 ])
 

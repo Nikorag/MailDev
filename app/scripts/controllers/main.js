@@ -28,8 +28,16 @@ app.controller('MainCtrl', [
     $scope.filterItems = function (search) {
       var items = filterFilter($scope.items, search)
       return items.filter(function (item) {
-        return $scope.projectFilter.includes(projectService.getProjectForAddr(item.envelope.remoteAddress).name)
+        var project = projectService.getProjectForAddr(item.envelope.remoteAddress);
+        return project === undefined || $scope.projectFilter.includes(projectService.getProjectForAddr(item.envelope.remoteAddress).name);
       })
+    }
+
+    $scope.getProjectColor = function(item){
+      var project = projectService.getProjectForAddr(item.envelope.remoteAddress);
+      if (project !== undefined){
+        return project.color;
+      }
     }
 
     var countUnread = function () {

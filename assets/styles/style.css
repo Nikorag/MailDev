@@ -176,17 +176,10 @@ a:focus {
 
 .email-container {
     padding-top: $toolbarHeight;
-  .projectList {
-    padding-right: 30px;
-    .dot{
-      width: 25px;
-      height: 25px;
-    }
-  }
 }
 
 .email-toolbar {
-    z-index: 10;
+    position: fixed; z-index: 10;
     width: 100%; background-color: $white;
 }
 
@@ -328,7 +321,7 @@ code {
  */
 .search-container {
     position: relative;
-    padding: 0.3em 0.8em 15px;
+    padding: 0.3em 0.8em 0;
 }
 
 .search-icon {
@@ -393,99 +386,3 @@ code {
   color: white;
   padding-top: 3px;
 }
-
-.project-container .projects-title {
-  padding:0.5em 1em;
-  color:white;
-  .title {
-    float:left;
-    padding-left:20px;
-  }
-  .icon {
-    float:right;
-    padding-right:20px;
-    cursor:pointer;
-    a {
-      color:white !important;
-    }
-  }
-}
-.project-container .projects-list {
-  padding:1.5em 1em;
-  background-color:white;
-  border:darkblue 1px solid;
-  margin-top:0px;
-  li {
-    list-style:none;
-    margin:3px 0px;
-    label, .ms-Label {
-      width:90%;
-      display:inline-block;
-    }
-  }
-}
-
-.projectList > li {
-  width:100%;
-  margin:15px 0px;
-  border-bottom:1px solid black;
-  list-style:none;
-  padding:15px 0px;
-  > .fa-pencil {
-    font-size:16px;
-    margin-right:8px;
-    line-height:24px;
-  }
-  > input {
-    border:none;
-    border-bottom:1px solid black;
-    text-transform:capitalize;
-    font-size:24px;
-  }
-  .projectBtn {
-    float:right;
-    margin-right:15px;
-    padding:0.3em 0.2em;
-    text-decoration:none;
-    color:#505050;
-    cursor: pointer;
-    .fa {
-      vertical-align:top;
-      margin-right:4px;
-      font-size:20px;
-    }
-  }
-  .projectBtn:hover {
-    color:#4994ce;
-  }
-}
-ul.addressList {
-  margin-top:10px;
-  margin-left:0px;
-  padding-left:21px;
-  li {
-    list-style:none;
-    margin:8px 0px;
-    .fa {
-      margin-right:15px;
-      cursor: pointer;
-    }
-    input {
-      width:95%;
-    }
-  }
-}
-
-.dot {
-  height: 13px;
-  width: 13px;
-  border-radius: 50%;
-  border-color: black;
-  border: 1px solid black;
-  display: inline-block;
-  float: right;
-}
-.sp-replacer {
-  float: right;
-}
-

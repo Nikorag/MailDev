@@ -35,4 +35,13 @@ app.controller('ProjectsCtrl', [
       $rootScope.$emit('saveProjects', editProjects)
       window.location.href = '#/'
     }
-  }])
+
+    $scope.initialize = function () {
+      var checkExist = setInterval(function() {
+        if ($('.color-picker-input').length) {
+          $('.color-picker-input').spectrum({preferredFormat: "hex"});
+          clearInterval(checkExist);
+        }
+      }, 100);
+    }
+}]);

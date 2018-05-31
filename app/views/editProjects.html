@@ -14,7 +14,7 @@
 </ul>
 <ul class="projectList">
   <li ng-repeat="project in editProjects track by $index">
-    <i class="fa fa-pencil"></i><input ng-model="project.name"/>
+    <i class="fa fa-pencil"></i><input ng-model="project.name"/><input type='text' class="color-picker-input" ng-model="project.color" />
     <ul class="addressList">
       <li ng-repeat="addr in project.addr track by $index">
         <div class="ms-TextField">
@@ -31,5 +31,6 @@
       Remove Project
     </a>
     <span class="clearfix">&nbsp;</span>
+    <div ng-init="initialize()"></div>
   </li>
 </ul>

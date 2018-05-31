@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="styles/style.css">
         <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.0/fabric.min.css">
         <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.0/fabric.components.min.css">
+        <link rel="stylesheet" href="components/spectrum/spectrum.css"/>
     </head>
     <body>
 
@@ -38,7 +39,7 @@
                           <div class="ms-ChoiceField">
                             <input id="demo-radio-selected_{{project.name}}" value="{{project.name}}" class="ms-ChoiceField-input" type="checkbox" checked="checked" ng-checked="projectFilter.indexOf(project.name) > -1" ng-click="toggleProjectSelection(project.name)">
                             <label for="demo-radio-selected_{{project.name}}" class="ms-ChoiceField-field">
-                              <span class="ms-Label">{{project.name}}</span>
+                              <span class="ms-Label">{{project.name}}</span><span class="dot" style="background-color: {{project.color}};"></span>
                             </label>
                           </div>
 
@@ -53,13 +54,14 @@
 
                 <div class="sidebar-scrollable-content">
                   <ul class="email-list">
-                        <li ng-repeat="item in filterItems(search) | orderBy:'time':!reverse | filter: search " class="ng-cloak">
+                        <li ng-repeat="item in filterItems(search) | orderBy:'time':!reverse | filter: search " class="ng-cloak" title="{{item.envelope.remoteAddress}}" style="background-color: {{item.envelope.color}};">
 
                             <a href="#/email/{{item.id}}" class="email-item email-{{item.id}}" ng-class="{current: item.id === currentItemId}" ng-click="markRead(item)">
                                 <span class="title">
                                     {{item.subject}}
                                     <i class="fa fa-paperclip" ng-hide="!item.attachments"></i>
                                     <i class="fa fa-circle unread-icon" ng-hide="item.read"></i>
+                                    <span class="dot" style="background-color: {{getProjectColor(item)}};"></span>
                                 </span>
                                 <span class="subline clearfix">
                                     <span class="subline-from">{{item.to.0.address}}</span>
@@ -121,6 +123,7 @@
 
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
         <script src="components/jquery/jquery.colorbox-min.js"></script>
+        <script src="components/spectrum/spectrum.js"></script>
 
         <script src="components/angular/angular.min.js"></script>
         <script src="components/angular-resource/angular-resource.min.js"></script>
